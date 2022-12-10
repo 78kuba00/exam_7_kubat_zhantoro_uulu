@@ -52,13 +52,19 @@ class ChoiceEdit(EditView):
     form_class = ChoiceForm
     template_name = 'choice/choice_edit.html'
     model = Choice
-    task = None
     context_object_name = 'choices'
-    redirect_url = 'index'
+    redirect_url = reverse_lazy('index',)
+
+    def get_success_url(self):
+        poll = get_object_or_404(Poll, pk=self.kwargs.get('pk'))
+
+        return reverse('poll_view', kwargs={'pk': poll.pk})
 
 
-class TaskDelete(DeleteView):
+class ChoiceDelete(DeleteView):
     template_name = 'choice/choice_delete.html'
     model = Choice
-    context_key = 'choise'
+    context_key = 'choice'
     redirect_url = reverse_lazy('index')
+    def get_success_url(self):
+        return reverse('poll_view', kwargs={'pk': self.kwargs.get('pk')})

@@ -8,7 +8,10 @@
         </div>
         <div class="card-body">
         {% for choice in poll.choices.all %}
-            <h6 class="card-title">{{ forloop.counter }}: {{ choice.variation }}</h6>
+            <h6 class="card-title">{{ forloop.counter }}: {{ choice.variation }}
+                <a href="{% url 'choice_edit' choice.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'choice_delete' choice.pk %}" class="btn btn-danger">Delete</a>
+            </h6>
 {#            <h6 class="card-title">Ответ: {% for choice in choices.variation.all %} {{ choice }}{% if not forloop.last %},{% endif %}{% endfor %}</h6>#}
 {#            <p class="card-text" style="white-space: pre-wrap">{{ task.description }}</p>#}
         {% endfor %}
@@ -16,7 +19,7 @@
         <div class="card-footer text-muted">
             <a href="{% url 'poll_edit' poll.pk %}" class="btn btn-primary">Edit</a>
             <a href="{% url 'poll_delete' poll.pk %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'choice_add' poll.pk %}" class="btn btn-danger">Add</a>
+            <a href="{% url 'choice_add' poll.pk %}" class="btn btn-success">Add Choice</a>
         </div>
     </div>
 {% endblock %}
