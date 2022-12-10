@@ -13,7 +13,8 @@ class PollForm(forms.ModelForm):
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        exclude = []
+        fields = ['variation']
+        exclude = ['poll']
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=50, required=False, label='Найти')

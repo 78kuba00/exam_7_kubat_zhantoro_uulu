@@ -37,6 +37,16 @@ class ChoiceCreate(CreateView):
     template_name = 'choice/create.html'
     model = Choice
     form_class = ChoiceForm
+    redirect_url = 'poll_view'
+
+    def form_valid(self, form):
+        form.instance.poll = get_object_or_404(Poll, pk=self.kwargs.get('pk'))
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('poll_view', kwargs={'pk': self.kwargs.get('pk')})
+
 
 class ChoiceEdit(EditView):
     form_class = ChoiceForm

@@ -1,37 +1,10 @@
-create.html{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block nav %}
-    <li class="nav-item">
-        {% include 'partial/simple_search.html' %}
-    </li>
-{% endblock %}
+
 
 {% block content %}
-    <h1>To-Do List</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-danger" value="Delete">
-        <div class="row">
-            {% for task in tasks %}
-                <div class="col col-lg-4 my-2">
-                    <div class="card">
-                        <h5 class="card-header"><input class="form-check-input" name="tasks" type="checkbox"
-                                                       value="{{ task.pk }}"
-                        > Название: <a
-                                href="{% url 'task_view' task.pk %}">{{ task.summary }}</a>
-                        </h5>
-                        <div class="card-body">
-                            <h5 class="card-title">Статус: {{ task.status.title }}</h5>
-                            <p class="card-text">Тип:
-                                {% for type in task.type.all %} {{ type }}{% if not forloop.last %},{% endif %}{% endfor %}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </form>
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
+<h1>Create Poll</h1>
+<form action="" method="POST">
+    {% include 'partial/form.html' with button_text='Create' %}
+</form>
 {% endblock %}
