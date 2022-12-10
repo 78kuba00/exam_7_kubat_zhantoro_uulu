@@ -23,16 +23,6 @@ class IndexViews(SearchView):
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
-
-# class TaskView(DetailView):
-#     template_name = 'task/task_view.html'
-#     model = Tracker
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['task'] = get_object_or_404(Tracker, pk=self.kwargs.get('pk'))
-#         return context
-
 class ChoiceCreate(CreateView):
     template_name = 'choice/create.html'
     model = Choice

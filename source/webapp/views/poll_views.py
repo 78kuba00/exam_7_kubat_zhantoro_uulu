@@ -11,7 +11,7 @@ class PollListView(ListView):
     template_name = 'poll/index.html'
     model = Poll
     context_object_name = 'polls'
-    paginate_by = 4
+    paginate_by = 5
     # paginate_orphans = 2
     ordering = '-created_at'
 
@@ -43,9 +43,6 @@ class PollDelete(DeleteView):
     model = Poll
     context_key = 'poll'
     redirect_url = reverse_lazy('index')
-    # model = Poll
-    # def get(self, request, *args, **kwargs):
-    #     return self.delete(request, *args, **kwargs)
-    #
+
     def get_success_url(self):
         return reverse('index')
