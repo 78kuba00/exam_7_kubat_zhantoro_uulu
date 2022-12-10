@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="POST">
+    {% csrf_token %}
+        <h4>Вы действительно хотите удалить опрос "{{ poll.question }}"?</h4>
+        <input type="submit" class="btn btn-danger" value="Да">
+        <a href="{% url 'poll_view' poll.pk %}" class="btn btn-success">Нет</a>
+    </form>
+{% endblock %}
+
