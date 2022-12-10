@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{#{% block nav %}#}
+{#    <li class="nav-item">#}
+{#        {% include 'partial/simple_search.html' %}#}
+{#    </li>#}
+{#{% endblock %}#}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'poll_add' %}">Create Poll ( + )</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+{#    <h1>Опросник</h1>#}
+    <form action="" method="POST">
+        {% csrf_token %}
+{#        <input type="submit" class="btn btn-danger" value="Delete">#}
+        <div class="row">
+            {% for poll in polls %}
+                <div class="col col-lg-2 my-4">
+                    <div class="card">
+                        <h5 class="card-header">Вопрос: <a
+                                href="{% url 'poll_view' poll.pk %}">{{ poll.question }}</a>
+{#                        </h5>#}
+{#                        <div class="card-body">#}
+{#                            <h5 class="card-title">Статус: {{ task.status.name }}</h5>#}
+{#                            <p class="card-text">Тип:#}
+{#                                {% for type in task.types.all %} {{ type }}{% if not forloop.last %},{% endif %}{% endfor %}#}
+{#                            </p>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </form>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from webapp.models import Poll
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
@@ -47,9 +47,13 @@ class PollEdit(EditView):
     #     return reverse('project_view', kwargs={'pk': self.object.pk})
 
 class PollDelete(DeleteView):
+    template_name = 'poll/poll_delete.html'
     model = Poll
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse('index')
+    context_key = 'poll'
+    redirect_url = reverse_lazy('index')
+    # model = Poll
+    # def get(self, request, *args, **kwargs):
+    #     return self.delete(request, *args, **kwargs)
+    #
+    # def get_success_url(self):
+    #     return reverse('index')
